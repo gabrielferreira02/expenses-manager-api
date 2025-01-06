@@ -1,6 +1,6 @@
 package com.gabrielferreira02.expensesManager.config;
 
-import com.gabrielferreira02.expensesManager.service.CustomUserDetailsServiceImpl;
+import com.gabrielferreira02.expensesManager.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,10 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final CustomUserDetailsServiceImpl userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
 
-    public SecurityConfig(CustomUserDetailsServiceImpl userDetailsService, JwtFilter jwtFilter) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService, JwtFilter jwtFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtFilter = jwtFilter;
     }
