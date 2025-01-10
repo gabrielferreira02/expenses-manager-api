@@ -1,5 +1,6 @@
 package com.gabrielferreira02.expensesManager.service;
 
+import com.gabrielferreira02.expensesManager.dto.ReportResponse;
 import com.gabrielferreira02.expensesManager.dto.TransactionRequest;
 import com.gabrielferreira02.expensesManager.entity.CustomUserDetails;
 import com.gabrielferreira02.expensesManager.entity.TransactionEntity;
@@ -30,6 +31,10 @@ public class TransactionService {
 
     @Transactional
     public ResponseEntity<?> create(TransactionRequest transactionRequest) {
+        if(transactionRequest.getValue() < 0) {
+            throw new Error("Field value can't be negative");
+        }
+
         UserEntity user = userRepository.findById(transactionRequest.getId())
                 .orElseThrow();
 
@@ -43,6 +48,10 @@ public class TransactionService {
 
     @Transactional
     public ResponseEntity<?> update(TransactionRequest transactionRequest) {
+        if(transactionRequest.getValue() < 0) {
+            throw new Error("Field value can't be negative");
+        }
+
         TransactionEntity transaction = transactionRepository.findById(transactionRequest.getId())
                 .orElseThrow();
 
@@ -57,8 +66,19 @@ public class TransactionService {
         if (transactionRepository.existsById(id)) {
             transactionRepository.deleteById(id);
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
+    }
+
+    public ReportResponse report(UUID id) {
+        if(!userRepository.existsById(id)) {
+            throw new Error("User not found");
+        }
+        Double paid = transactionRepository.findAllPaidTransactionsById(id);
+        Double received = transactionRepository.findAllReceivedTransactionsById(id);
+        if(received == null) received = 0.0;
+        if(paid == null) paid = 0.0;
+        Double total = received - paid;
+        return new ReportResponse(total);
     }
 }

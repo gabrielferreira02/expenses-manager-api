@@ -1,5 +1,6 @@
 package com.gabrielferreira02.expensesManager.controller;
 
+import com.gabrielferreira02.expensesManager.dto.ReportResponse;
 import com.gabrielferreira02.expensesManager.dto.TransactionRequest;
 import com.gabrielferreira02.expensesManager.entity.TransactionEntity;
 import com.gabrielferreira02.expensesManager.service.TransactionService;
@@ -38,5 +39,10 @@ public class TransactionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         return transactionService.delete(id);
+    }
+
+    @GetMapping("report/{id}")
+    public ReportResponse report(@PathVariable UUID id) {
+        return transactionService.report(id);
     }
 }
