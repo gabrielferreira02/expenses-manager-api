@@ -24,9 +24,11 @@ public class TransactionService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<TransactionEntity> findAll() {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return transactionRepository.findAllById(user.getId());
+    public List<TransactionEntity> findAll(UUID id) {
+        if(!userRepository.existsById(id)) {
+            throw new Error("User not found");
+        }
+        return transactionRepository.findAllById(id);
     }
 
     @Transactional
