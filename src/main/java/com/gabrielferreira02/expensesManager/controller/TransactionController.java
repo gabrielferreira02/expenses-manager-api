@@ -23,7 +23,7 @@ public class TransactionController {
 
     @GetMapping("/{id}")
     public List<TransactionEntity> findAll(@PathVariable UUID id) {
-        return transactionService.findAll();
+        return transactionService.findAll(id);
     }
 
     @PostMapping
