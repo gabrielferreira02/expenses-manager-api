@@ -2,7 +2,6 @@ package com.gabrielferreira02.expensesManager.service;
 
 import com.gabrielferreira02.expensesManager.dto.ReportResponse;
 import com.gabrielferreira02.expensesManager.dto.TransactionRequest;
-import com.gabrielferreira02.expensesManager.entity.CustomUserDetails;
 import com.gabrielferreira02.expensesManager.entity.TransactionEntity;
 import com.gabrielferreira02.expensesManager.entity.UserEntity;
 import com.gabrielferreira02.expensesManager.repository.TransactionRepository;
@@ -10,7 +9,6 @@ import com.gabrielferreira02.expensesManager.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
