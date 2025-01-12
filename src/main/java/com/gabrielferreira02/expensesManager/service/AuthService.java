@@ -28,7 +28,7 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<?> login(String username, String password) {
+    public ResponseEntity<LoginResponse> login(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         username,
@@ -43,7 +43,7 @@ public class AuthService {
     }
 
     @Transactional
-    public ResponseEntity<?> register(String username, String password) {
+    public ResponseEntity<UserEntity> register(String username, String password) {
         UserEntity user = new UserEntity();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
