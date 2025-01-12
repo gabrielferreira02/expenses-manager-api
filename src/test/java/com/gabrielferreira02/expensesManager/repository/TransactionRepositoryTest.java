@@ -62,6 +62,13 @@ class TransactionRepositoryTest {
     }
 
     @Test
+    void findAllByIdWithInvalidId() {
+        List<TransactionEntity> transactions = transactionRepository.findAllById(UUID.randomUUID());
+
+        assertEquals(0, transactions.size());
+    }
+
+    @Test
     void findAllReceivedTransactionsById() {
         Double totalReceived = transactionRepository.findAllReceivedTransactionsById(this.savedUser.getId());
 
@@ -70,10 +77,24 @@ class TransactionRepositoryTest {
     }
 
     @Test
+    void findAllReceivedTransactionsByIdWithInvalidId() {
+        Double totalReceived = transactionRepository.findAllReceivedTransactionsById(UUID.randomUUID());
+
+        assertNull(totalReceived);
+    }
+
+    @Test
     void findAllPaidTransactionsById() {
         Double totalPaid = transactionRepository.findAllPaidTransactionsById(this.savedUser.getId());
 
         assertNotNull(totalPaid);
         assertEquals(70, totalPaid);
+    }
+
+    @Test
+    void findAllPaidTransactionsByIdWithInvalidId() {
+        Double totalPaid = transactionRepository.findAllPaidTransactionsById(UUID.randomUUID());
+
+        assertNull(totalPaid);
     }
 }
