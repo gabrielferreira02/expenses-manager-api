@@ -30,7 +30,7 @@ public class TransactionService {
     }
 
     @Transactional
-    public ResponseEntity<?> create(TransactionRequest transactionRequest) {
+    public ResponseEntity<TransactionEntity> create(TransactionRequest transactionRequest) {
         if(transactionRequest.getValue() < 0) {
             throw new Error("Field value can't be negative");
         }
@@ -47,7 +47,7 @@ public class TransactionService {
     }
 
     @Transactional
-    public ResponseEntity<?> update(TransactionRequest transactionRequest) {
+    public ResponseEntity<TransactionEntity> update(TransactionRequest transactionRequest) {
         if(transactionRequest.getValue() < 0) {
             throw new Error("Field value can't be negative");
         }
